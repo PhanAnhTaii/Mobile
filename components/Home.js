@@ -3,10 +3,11 @@ import { ScrollView, StyleSheet, Text, View,TouchableOpacity, Image } from 'reac
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from './Footer';
 import Header from './Header';
-import Newproduct from './products/Newproduct';
 import Product from './products/Product';
-import Banner from './products/Banner';
-import Category from './products/Category';
+import ProductJewelery from './products/ProductJewelery';
+import ProductElectronics from './products/ProductElectronics';
+import ProductMenClothing from './products/ProductMenClothing';
+import ProductWomenClothing from './products/ProductWomenClothing';
 import Search from './products/Search';
 import Slider from './products/Slider';
 
@@ -17,40 +18,27 @@ export default function Home({ navigation }) {
   };
   return (
     <View style={styles.container}>
-    {/* //  <View style={styles.header}>
-    //     <Header navigation={navigation} />
-    //   </View>  */}
-
-      <ScrollView>
-
-      {/* <View style={styles.banner}>
-        <Banner/>
-      </View> */}
+     <ScrollView>
         <View style={styles.search}>
         <Search />
       </View>
       <View style={styles.slider}>
         <Slider />
-      </View>
-      {/* <View style={styles.banner}>
-        <Category/>
-      </View> */}
-
-      {/* <Text style={styles.textnewproduct}>SẢN PHẨM MỚI</Text>
-      <View style={styles.newproduct}>
-        <Newproduct/>
-      </View> */}
-        
+      </View>    
         <View>
           <Text style={styles.textnewproduct}>TẤT CẢ SẢN PHẨM</Text>
-
           <Product navigateToProductDetail={navigateToProductDetail} />
+          <Text style={styles.textnewproduct}>TRANG SỨC</Text>
+          <ProductJewelery navigateToProductDetail={navigateToProductDetail} />
+          <Text style={styles.textnewproduct}>ĐIỆN TỬ</Text>
+          <ProductElectronics navigateToProductDetail={navigateToProductDetail} />
+          <Text style={styles.textnewproduct}>ĐỔ NAM</Text>
+          <ProductMenClothing navigateToProductDetail={navigateToProductDetail} />
+          <Text style={styles.textnewproduct}>ĐỔ NỮ</Text>
+          <ProductWomenClothing navigateToProductDetail={navigateToProductDetail} />
+          
         </View>
-   
       </ScrollView>
-
-      
-
       <View style={styles.footer}>
         <Footer navigation={navigation} />
       </View>

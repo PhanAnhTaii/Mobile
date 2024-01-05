@@ -12,11 +12,11 @@ export default function Profile({ navigation }) {
       <View style={styles.profileInfoContainer}>
         <Image
           style={styles.profileImage}
-          source={{ uri: 'https://placekitten.com/200/200' }} // Replace with your user's profile picture URL
-        />
-        <Text style={styles.userName}>John Doe</Text>
-        <Text style={styles.userInfo}>Web Developer</Text>
-        <Text style={styles.userInfo}>Location: New ork</Text>
+          source={{ uri: 'https://cdn2.vectorstock.com/i/1000x1000/95/51/little-boy-logo-vector-28159551.jpg' }}     
+            />
+        <Text style={styles.userName}>Anh Tài</Text>
+        <Text style={styles.userInfo}>Tester</Text>
+        <Text style={styles.userInfo}>Location: Việt Nam</Text>
         <TouchableOpacity style={styles.editButton}>
           <Icon name="pencil" size={20} color="#fff" />
           <Text style={styles.editButtonText}>Edit Profile</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   profileImage: {
-    width: 120,
+    width: 140,
     height: 120,
     borderRadius: 60,
     marginBottom: 10,

@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../Header';
 
 
-export default function Cart({navigation,navigateToProductDetail}) {
+export default function Cart({navigation}) {
+ 
   const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     const loadCartItems = async () => {
@@ -31,7 +32,8 @@ export default function Cart({navigation,navigateToProductDetail}) {
   }, []);
 
   const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return total.toFixed(2); // Làm tròn đến 2 chữ số thập phân
   };
 
   const handleDeleteItem = (itemId) => {
@@ -112,6 +114,10 @@ export default function Cart({navigation,navigateToProductDetail}) {
       console.error('Lỗi khi lưu giỏ hàng mới:', error);
     });
 };
+const navigateToProductDetail = (item) => {
+   
+  navigation.navigate('ProductDetail', { item });
+};
 
 
 return (
@@ -119,13 +125,13 @@ return (
          <View style={styles.header}>
         <Header navigation={navigation} />
       </View>
-    <Text style={styles.header}>Giỏ hàng của tôi</Text>
+    <Text style={styles.header}>Giỏ hàng </Text>
     {cartItems.length > 0 ? (
       <FlatList
         data={cartItems}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          // <TouchableOpacity onPress={() => navigateToProductDetail(item)}>
+           <TouchableOpacity onPress={()=>navigateToProductDetail(item)}>
           <View style={styles.cartItem}>
 
             <Image source={{ uri: item.image }} style={styles.productImage} />
@@ -138,7 +144,7 @@ return (
                 <View style={styles.action}>
                   <View style={styles.congtru}>
                     <TouchableOpacity  onPress={() => handleIncreaseQuantity(item.id)}>
-                      <Icon name="plus" size={15} color="#888888" />
+                      <Icon name="plus" size={19} color="#888888" />
                     </TouchableOpacity>
                   </View>
                  
@@ -146,7 +152,7 @@ return (
 
                   <View style={styles.congtru}>
                   <TouchableOpacity  onPress={() => handleReduceQuantity(item.id)}>
-                    <Icon  name="minus" size={15} color="#888888" />
+                    <Icon  name="minus" size={19} color="#888888" />
                   </TouchableOpacity>
                   </View>
                 </View>
@@ -157,7 +163,7 @@ return (
               </View>
             </View>
           </View>
-          // </TouchableOpacity>
+           </TouchableOpacity>
         )}
       />
     ) : (
@@ -182,7 +188,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    fontSize: 20,
+    fontSize: 23,
+    textAlign:"center",
+    color: 'red',
     fontWeight: 'bold',
     marginBottom: 16,
   },
@@ -219,7 +227,7 @@ const styles = StyleSheet.create({
     borderRightWidth:0.6,
     borderLeftWidth:0.6,
     borderColor:'#EEEEEE',
-    width:50,
+    width:30,
     height:20,
  
   },
@@ -233,13 +241,12 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:'#EEEEEE',
     width:100,
-    height:20,
+    height:25,
   },
   actionButtons: {
     flexDirection: 'row',
     marginTop: 10,
     justifyContent: 'space-around',
-
     height:20,
   },
   actionButtonText: {
@@ -260,7 +267,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   paymentButton: {
-    backgroundColor: '#F15B31',
+    backgroundColor: '#3399FF',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,

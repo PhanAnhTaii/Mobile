@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity,ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../Header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function ProductDetail({ route,navigation }) {
-  const { item } = route.params;
 
+export default function ProductDetail({ route, navigation }) {
+  const { item } = route.params;
+  const handlePress = () => {
+    alert("Thêm vào giỏ hàng thành công!");
+  };
   const addToCart = async (product) => {
     try {
       const existingCart = await AsyncStorage.getItem('cart');
@@ -15,6 +18,7 @@ export default function ProductDetail({ route,navigation }) {
       await AsyncStorage.setItem('cart', JSON.stringify(cart));
 
       console.log('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+      alert("Thêm vào giỏ hàng thành công!");
     } catch (error) {
       console.error('Lỗi khi thêm vào giỏ hàng:', error);
     }
@@ -22,24 +26,26 @@ export default function ProductDetail({ route,navigation }) {
 
   return (
     <View style={styles.container}>
-            <View style={styles.header}>
+      <ScrollView>
+      <View style={styles.header}>
         <Header navigation={navigation} />
       </View>
       <View style={styles.image}>
         <Image source={{ uri: item.image }} style={styles.productImage} />
       </View>
-     
+
       <Text style={styles.productTitle}>{item.title}</Text>
       <Text style={styles.productPrice}>Giá tiền: ${item.price}</Text>
       <Text style={styles.productDescription}>{item.description}</Text>
       <Text style={styles.productCategory}>Danh mục: {item.category}</Text>
-    
+
       <TouchableOpacity
         style={styles.addToCartButton}
         onPress={() => addToCart(item)}
       >
-        <Text style={styles.addToCartButtonText}>Thêm vào giỏ hàng</Text>
+        <Text style={styles.addToCartButtonText} >Thêm vào giỏ hàng</Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
@@ -49,10 +55,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 16,
-   
+
   },
   image: {
-    alignItems:"center"
+    alignItems: "center"
   },
   productImage: {
     width: '100%',
@@ -60,13 +66,13 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     resizeMode: 'center',
     marginBottom: 16,
-    
+
   },
   productTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
-   
+
   },
   productPrice: {
     fontSize: 18,
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
   productDescription: {
     fontSize: 16,
     marginBottom: 16,
-  
+
   },
   productCategory: {
     fontSize: 16,
@@ -101,11 +107,11 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   addToCartButton: {
-    backgroundColor: '#F15B31',
+    backgroundColor: '#3399FF',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
-    alignItems:"center",
+    alignItems: "center",
   },
   addToCartButtonText: {
     color: 'white',

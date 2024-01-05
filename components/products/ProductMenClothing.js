@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import { GET_ALL, GET_IMG } from '../../api/apiService';
 
 const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
   const [data, setData] = useState([]);
@@ -14,7 +13,7 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
 
   const getDataUsingSimpleGetCall = () => {
     axios
-      .get('https://fakestoreapi.com/products')
+      .get("https://fakestoreapi.com/products/category/men's%20clothing")
       .then(function (response) {
         setData(response.data);
       })
@@ -25,22 +24,6 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
         console.log('Finally called');
       });
   };
-  // useEffect(() => {
-  //   GET_ALL("products").then((response) => {
-  //     const responseData = response.data;
-  //     if (responseData && Array.isArray(responseData.content)) {
-  //       setData(responseData.content);
-  //     }
-  //     else {
-  //       console.error("Data received from the API is not a supported format.");
-  //     }
-  //     setIsLoading(false);
-  //   }).catch((error) => {
-  //     console.error("Error fetching data:", error);
-  //     setIsLoading(false);
-  //   });
-  // }, []);
-
 
   const truncateTitle = (title) => {
     const maxLines = 2;
@@ -77,7 +60,6 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
       <TouchableOpacity onPress={() => navigateToProductDetail(item)}>
     
         <View style={styles.productItem}>
-        {/* <Image source={{ uri: GET_IMG('products', item.photo) }} style={styles.productImage} /> */}
         <Image source={{ uri: item.image }} style={styles.productImage} />
           <View style={styles.productInfo}>
             <Text style={styles.productName}>{truncatedTitle}</Text>

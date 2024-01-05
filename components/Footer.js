@@ -23,12 +23,12 @@ export default function Footer({ navigation }) {
           </View>
         </TouchableOpacity>
         
-        <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
           <View style={styles.centericon}>
               <Icon name="heart" size={20} color="black" />
             <Text style={{fontSize:12}}>Yêu thích</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
         <View style={styles.centericon}>

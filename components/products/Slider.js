@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-import { StatusBar, ScrollView, StyleSheet, Text, View, Image, TextInput,TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-
-export default function Category() {
-  const [searchText, setSearchText] = useState('');
-
-  const handleSearch = () => {
-    console.log('Performing search for:', searchText);
-    // Thực hiện xử lý tìm kiếm tại đây
-  };
+const Slider = () => {
   const slider = [
     { id: 1, name: 'Sản phẩm 1', image: require('../../assets/images/product3.jpg') },
     { id: 2, name: 'Sản phẩm 2', image: require('../../assets/images/product2.jpg') },
@@ -26,9 +19,7 @@ export default function Category() {
   };
 
   return (
-    
     <View style={styles.container}>
-   
       <Carousel
         data={slider}
         renderItem={renderProductItem}
@@ -54,17 +45,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productImage: {
-    width: 370,
+    width: 360,
     height: 200,
     borderRadius: 10,
   },
-  input: {
-    flex: 1,
-    height: 40,
-    fontSize: 16,
-    paddingHorizontal: 10,
-  },
-  searchButton: {
-    padding: 8,
-  },
 });
+
+export default Slider;

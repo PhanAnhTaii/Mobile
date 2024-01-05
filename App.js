@@ -3,14 +3,13 @@ import { StyleSheet, View, ImageBackground, KeyboardAvoidingView } from 'react-n
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from './componets/login/Login';
-import Home from './componets/Home';
-import Register from './componets/login/Register';
-import Profile from './componets/profile/Profile';
-import Favorite from './componets/favorite/Favorite';
-import Cart from './componets/cart/Cart';
-import Product from './componets/products/Product';
-import ProductDetail from './componets/products/ProductDetail';
+import Login from './components/login/Login';
+import Home from './components/Home';
+import Register from './components/login/Register';
+import Profile from './components/profile/Profile';
+import Cart from './components/cart/Cart';
+import Product from './components/products/Product';
+import ProductDetail from './components/products/ProductDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,11 +38,11 @@ export default function App() {
          component={Profile}
          options={{ headerShown: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
          name="Favorite"
          component={Favorite}
          options={{ headerShown: false }}
-        />
+        /> */}
          <Stack.Screen
          name="Cart"
          component={Cart}
