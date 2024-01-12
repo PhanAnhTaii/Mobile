@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, TouchableOpacity,ScrollView } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Header from '../Header';
 
-const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
+
+const Product = ({ navigation, addToCart }) => {
   const [data, setData] = useState([]);
   const [numColumns, setNumColumns] = useState(2);
 
@@ -74,14 +76,23 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
       </TouchableOpacity>
     );
   };
+  
 
   const keyExtractor = (item, index) => index.toString();
-
+  const navigateToProductDetail = (item) => {
+   
+    navigation.navigate('ProductDetail', { item });
+  };
   return (
     <SafeAreaView style={styles.scrollContainer}>
+      <ScrollView>
       <View style={styles.home}>
+      <View style={styles.header}>
+        <Header navigation={navigation} />
+      </View>
+      <View><Text style={styles.title}>Jewelery</Text></View>
        
-        <FlatList
+        <FlatList navigateToProductDetail={navigateToProductDetail}
           key={numColumns}
           data={data}
           renderItem={renderItem}
@@ -89,6 +100,7 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
           numColumns={numColumns}
         />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -102,6 +114,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
 
+  },
+  header:{
+    marginTop:20,
+    marginRight:300
+  },
+  title:{
+    marginBottom:15,
+    fontSize:28,
+    fontWeight: 'bold',
+    color:"red",
+    textAlign:'center'
   },
   Text: {
     fontSize: 24,
@@ -118,7 +141,7 @@ const styles = StyleSheet.create({
 
   },
   productImage: {
-    width: '100%',
+    width: '90%',
     aspectRatio: 1,
     borderRadius: 3,
     resizeMode: 'center',
@@ -134,7 +157,7 @@ const styles = StyleSheet.create({
   
   },
   productPrice: {
-    marginTop: 5,
+    marginTop: 3,
     fontSize: 16,
     color: 'red',
     fontWeight:'bold',

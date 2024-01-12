@@ -158,7 +158,7 @@ return (
                 </View>
 
                 <TouchableOpacity onPress={() => handleDeleteItem(item.id)}>
-                  <Text>Xóa</Text>
+                  <Text style={{fontSize:16,color: 'gray',}}>Xóa</Text>
                 </TouchableOpacity>
               </View>
             </View>

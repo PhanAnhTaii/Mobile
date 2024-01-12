@@ -10,6 +10,7 @@ import ProductMenClothing from './products/ProductMenClothing';
 import ProductWomenClothing from './products/ProductWomenClothing';
 import Search from './products/Search';
 import Slider from './products/Slider';
+import Category from './products/Category';
 
 export default function Home({ navigation }) {
   const navigateToProductDetail = (item) => {
@@ -25,18 +26,12 @@ export default function Home({ navigation }) {
       <View style={styles.slider}>
         <Slider />
       </View>    
+      <View style={styles.slider}>
+        <Category navigation={navigation}/>
+      </View>    
         <View>
           <Text style={styles.textnewproduct}>TẤT CẢ SẢN PHẨM</Text>
           <Product navigateToProductDetail={navigateToProductDetail} />
-          <Text style={styles.textnewproduct}>TRANG SỨC</Text>
-          <ProductJewelery navigateToProductDetail={navigateToProductDetail} />
-          <Text style={styles.textnewproduct}>ĐIỆN TỬ</Text>
-          <ProductElectronics navigateToProductDetail={navigateToProductDetail} />
-          <Text style={styles.textnewproduct}>ĐỔ NAM</Text>
-          <ProductMenClothing navigateToProductDetail={navigateToProductDetail} />
-          <Text style={styles.textnewproduct}>ĐỔ NỮ</Text>
-          <ProductWomenClothing navigateToProductDetail={navigateToProductDetail} />
-          
         </View>
       </ScrollView>
       <View style={styles.footer}>

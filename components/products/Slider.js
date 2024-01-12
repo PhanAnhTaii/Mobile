@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productImage: {
-    width: 360,
+    width: 350,
     height: 200,
     borderRadius: 10,
   },

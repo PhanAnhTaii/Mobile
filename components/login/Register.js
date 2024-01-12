@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    color:'#3399FF',
     fontWeight: 'bold',
   },
   container: {
@@ -82,6 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#3399FF',
     padding: 10,
     marginTop: 30,
+    borderRadius:20
+
   },
   buttonText: {
     width: 300,

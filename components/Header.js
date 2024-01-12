@@ -7,7 +7,7 @@ export default function Header({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        <Icon name="chevron-left" size={20} color="black" />
+        <Icon name="chevron-left" size={20} color="black"  />
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -16,7 +16,7 @@ export default function Header({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 28,
     marginStart:10,
     justifyContent: 'center',
     height: 20,

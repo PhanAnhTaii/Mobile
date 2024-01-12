@@ -81,7 +81,7 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
     <SafeAreaView style={styles.scrollContainer}>
       <View style={styles.home}>
        
-        <FlatList
+        <FlatList 
           key={numColumns}
           data={data}
           renderItem={renderItem}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   productItem: {
     alignItems: 'center',
     backgroundColor:'white',
-    margin:3,
+    margin:1,
     width:180,
     height:270,
     
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   productInfo: {
     marginTop: 5,
-    width: '100%',
+    width: '90%',
 
   },
   productName: {

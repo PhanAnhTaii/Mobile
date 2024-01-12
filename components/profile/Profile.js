@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     marginStart: 10,
+    marginEnd: 10,
   },
   header: {
     // Your header styles

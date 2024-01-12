@@ -7,9 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ProductDetail({ route, navigation }) {
   const { item } = route.params;
-  const handlePress = () => {
-    alert("Thêm vào giỏ hàng thành công!");
-  };
   const addToCart = async (product) => {
     try {
       const existingCart = await AsyncStorage.getItem('cart');
@@ -66,6 +63,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     resizeMode: 'center',
     marginBottom: 16,
+    marginTop: 10,
 
   },
   productTitle: {
