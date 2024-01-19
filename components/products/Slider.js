@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet,Text } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 const Slider = () => {
@@ -20,6 +20,7 @@ const Slider = () => {
 
   return (
     <View style={styles.container}>
+      {/* <View><Text style={styles.text}>Anh Tài</Text></View> */}
       <Carousel
         data={slider}
         renderItem={renderProductItem}
@@ -49,6 +50,10 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
   },
+  text:{
+    margin:20,
+  
+  }
 });
 
 export default Slider;

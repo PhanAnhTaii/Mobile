@@ -15,6 +15,7 @@ import ProductJewelery from './components/products/ProductJewelery';
 import ProductElectronics from './components/products/ProductElectronics';
 import ProductMenClothing from './components/products/ProductMenClothing';
 import ProductWomenClothing from './components/products/ProductWomenClothing';
+import ResultSearch from './components/products/ResultSearch';
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,11 @@ export default function App() {
         <Stack.Screen
          name="ProductWomenClothing"
          component={ProductWomenClothing}
+         options={{ headerShown: false }}
+        />
+          <Stack.Screen
+         name="ResultSearch"
+         component={ResultSearch}
          options={{ headerShown: false }}
         />
 

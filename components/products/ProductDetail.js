@@ -6,14 +6,27 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export default function ProductDetail({ route, navigation }) {
-  const { item } = route.params;
-  const addToCart = async (product) => {
+   const { item } = route.params;
+   
+ 
+   const addToCart = async (product) => {
     try {
       const existingCart = await AsyncStorage.getItem('cart');
       const cart = existingCart ? JSON.parse(existingCart) : [];
-      cart.push(product);
+      
+      // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
+      const existingProductIndex = cart.findIndex(item => item.id === product.id);
+  
+      if (existingProductIndex !== -1) {
+        // Nếu sản phẩm đã tồn tại, tăng số lượng lên 1
+        cart[existingProductIndex].quantity += 1;
+      } else {
+        // Nếu sản phẩm chưa tồn tại, thêm sản phẩm vào giỏ hàng
+        product.quantity = 1; // Set số lượng ban đầu là 1
+        cart.push(product);
+      }
+  
       await AsyncStorage.setItem('cart', JSON.stringify(cart));
-
       console.log('Sản phẩm đã được thêm vào giỏ hàng thành công!');
       alert("Thêm vào giỏ hàng thành công!");
     } catch (error) {

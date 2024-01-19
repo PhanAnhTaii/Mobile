@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity,Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
-    console.log('Performing search for:', searchText);
-    // Thực hiện xử lý tìm kiếm tại đây
+    navigation.navigate('ResultSearch');
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
+      {/* <TextInput
         style={styles.input}
         placeholder="Search"
         value={searchText}
         onChangeText={setSearchText}
-      />
+      /> */}
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-        <MaterialIcons name="search" size={24} color="gray" />
+        <Text style={{fontSize:20,paddingLeft:17,fontWeight:"bold",color:"blue"}}>BEAUTY BEACUSE OF SILK</Text>
       </TouchableOpacity>
     </View>
     

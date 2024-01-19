@@ -1,45 +1,66 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity,
-     KeyboardAvoidingView, ImageBackground } from 'react-native';
-import React from 'react';
+import {
+  StyleSheet, Text, View, TextInput, TouchableOpacity,
+  KeyboardAvoidingView, ImageBackground
+} from 'react-native';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login({ navigation }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    const accounts = await AsyncStorage.getItem("user");
+    if (accounts) {
+      const accountArray = JSON.parse(accounts);
+      var flag = accountArray.find((account) => 
+      account.username == username && account.password == password
+  );
+      if(flag){
+        alert("Đăng nhập thành công");
+        navigation.navigate("Home");
+      }else{
+        alert("Email hoặc mật khẩu không chính xác");
+        return;
+      }
+    }
+  };
   return (
     <KeyboardAvoidingView
-  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-  style={styles.container}
->
-  <View>
-  <ImageBackground style={styles.background}>
-        <Text style={styles.title}>ĐĂNG NHẬP</Text>
-        <View style={{marginTop:40}}>
-          <View style={styles.iconinput}>
-            <Icon name="user" size={30} color="black" />
-            <TextInput style={styles.input} placeholder=" Nhập tên đăng nhập hoặc email" />
-          </View>
-         
-          <View style={styles.iconinput}>
-            <Icon name="lock" size={30} color="black" />
-            <TextInput style={styles.input} placeholder=" Nhập mật khẩu" />
-          </View>
-          <Text style={{ alignSelf: 'flex-end' }}>Quên mật khẩu?</Text>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.buttonText}>Đăng nhập</Text>
-        </TouchableOpacity>
-        <View style={styles.rowContainer}>
-          <Text style={{ alignSelf: 'flex-end' }}>Bạn chưa có tài khoản? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={{ textAlign: 'center', color: 'red' }}> Đăng kí</Text>
-          </TouchableOpacity>
-        </View>
-        <StatusBar style="auto" />
-      </ImageBackground>
-  </View>
-</KeyboardAvoidingView>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <View>
+        <ImageBackground style={styles.background} source={require('../../assets/images/bglogin.jpg')}>
+          <Text style={styles.title}>ĐĂNG NHẬP</Text>
+          <View style={{ marginTop: 40 }}>
+            <View style={styles.iconinput}>
+              <Icon name="user" size={30} color="gray" />
+              <TextInput style={styles.input} placeholder=" Nhập tên đăng nhập hoặc email" onChangeText={(e) => setUsername(e)}/>
+            </View>
 
-  
+            <View style={styles.iconinput}>
+              <Icon name="lock" size={30} color="gray" />
+              <TextInput style={styles.input} placeholder=" Nhập mật khẩu"  onChangeText={(e) => setPassword(e)}/>
+            </View>
+            <Text style={{ alignSelf: 'flex-end' }}>Quên mật khẩu?</Text>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
+            <Text style={styles.buttonText}>Đăng nhập</Text>
+          </TouchableOpacity>
+          <View style={styles.rowContainer}>
+            <Text style={{ alignSelf: 'flex-end' }}>Bạn chưa có tài khoản? </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+              <Text style={{ textAlign: 'center', color: 'red' }}> Đăng kí</Text>
+            </TouchableOpacity>
+          </View>
+          <StatusBar style="auto" />
+        </ImageBackground>
+      </View>
+    </KeyboardAvoidingView>
+
+
   );
 }
 
@@ -49,17 +70,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
-  iconinput:{
+  iconinput: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor:'black',
-    borderBottomWidth:0.3,
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.3,
     marginBottom: 10,
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color:'#3399FF',
+    color: '#3399FF',
   },
   container: {
     flex: 1,
@@ -69,32 +90,28 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: 300,
-  
-    backgroundColor: 'white',
-    
     paddingHorizontal: 10,
-   
+
   },
   button: {
     backgroundColor: '#3399FF',
     padding: 10,
     marginTop: 30,
-    borderRadius:20
+    borderRadius: 20
   },
   buttonText: {
     width: 300,
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
+
   },
   background: {
     flex: 1,
-
-    backgroundColor: 'white',
     resizeMode: 'cover',
     justifyContent: 'center',
     alignItems: 'center',
-    width:420
+    width: 420
   },
 });
 

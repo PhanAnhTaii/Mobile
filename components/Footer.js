@@ -13,12 +13,18 @@ export default function Footer({ navigation }) {
             <Text style={{fontSize:12}}>Trang chủ</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ResultSearch')}>
+          <View style={styles.centericon}>      
+              <Icon name="search" size={20} color="black" />
+            <Text style={{fontSize:12}}>Trang chủ</Text>
+          </View>
+        </TouchableOpacity>
 
 
        
         <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
           <View style={styles.centericon}>          
-              <Icon name="shopping-cart" size={20} color="red" />       
+              <Icon name="shopping-cart" size={20} color="black" />       
             <Text style={{fontSize:12}}>Giỏ hàng</Text>
           </View>
         </TouchableOpacity>
@@ -26,14 +32,14 @@ export default function Footer({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
         <View style={styles.centericon}>
-            <Icon name="bell" size={20} color="orange" />       
+            <Icon name="bell" size={20} color="black" />       
           <Text style={{fontSize:12}}>Thông báo</Text>
         </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
         <View style={styles.centericon}>     
-            <Icon name="user" size={20} color="green" />    
+            <Icon name="user" size={20} color="black" />    
           <Text style={{fontSize:12}}>Tôi</Text>
         </View>
         </TouchableOpacity>

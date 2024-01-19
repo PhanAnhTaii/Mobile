@@ -1,12 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/FontAwesome'; 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../Header';
 
 
-export default function Cart({navigation}) {
- 
+export default function Cart({ navigation }) {
+  const handleSubmit = async () => {
+    const existingCart = await AsyncStorage.getItem('cart');
+    if (existingCart) {
+      await AsyncStorage.setItem('cart', JSON.stringify([]));
+      setCartItems([]);
+      alert("Thanh toán thành công!");
+    } else{
+      alert("Thanh toán thất bại!");
+    }
+  }
+  const handleAddToCart = (newItem) => {
+    const existingItem = cartItems.find(item => item.id === newItem.id);
+
+    if (existingItem) {
+      const updatedCart = cartItems.map(item => {
+        if (item.id === newItem.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+
+      setCartItems(updatedCart);
+    } else {
+      const updatedCart = [...cartItems, { ...newItem, quantity: 1 }];
+      setCartItems(updatedCart);
+    }
+
+    AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
+      .then(() => {
+        console.log('Sản phẩm đã được thêm vào giỏ hàng');
+      })
+      .catch((error) => {
+        console.error('Lỗi khi lưu giỏ hàng mới:', error);
+      });
+  };
   const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     const loadCartItems = async () => {
@@ -14,20 +48,20 @@ export default function Cart({navigation}) {
         const cartData = await AsyncStorage.getItem('cart');
         if (cartData) {
           const parsedCart = JSON.parse(cartData);
-  
-        
+
+
           const updatedCart = parsedCart.map(item => ({
             ...item,
             quantity: item.quantity || 1,
           }));
-  
+
           setCartItems(updatedCart);
         }
       } catch (error) {
         console.error('Lỗi khi đọc dữ liệu giỏ hàng:', error);
       }
     };
-  
+
     loadCartItems();
   }, []);
 
@@ -41,7 +75,7 @@ export default function Cart({navigation}) {
     const updatedCart = cartItems.filter(item => item.id !== itemId);
     setCartItems(updatedCart);
 
-   
+
     AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
       .then(() => {
         console.log('Sản phẩm đã được xóa khỏi giỏ hàng');
@@ -52,26 +86,26 @@ export default function Cart({navigation}) {
   };
   const handleDecreaseQuantity = (itemId) => {
 
-  const updatedCart = cartItems.map(item => {
-    if (item.id === itemId) {
-      
-      const newQuantity = Math.max(1, item.quantity - 1);
-      return { ...item, quantity: newQuantity };
-    }
-    return item;
-  });
+    const updatedCart = cartItems.map(item => {
+      if (item.id === itemId) {
 
-  setCartItems(updatedCart);
-
-
-  AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
-    .then(() => {
-      console.log('Số lượng sản phẩm đã được giảm');
-    })
-    .catch((error) => {
-      console.error('Lỗi khi lưu giỏ hàng mới:', error);
+        const newQuantity = Math.max(1, item.quantity - 1);
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
     });
-};
+
+    setCartItems(updatedCart);
+
+
+    AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
+      .then(() => {
+        console.log('Số lượng sản phẩm đã được giảm');
+      })
+      .catch((error) => {
+        console.error('Lỗi khi lưu giỏ hàng mới:', error);
+      });
+  };
 
   const handleIncreaseQuantity = (itemId) => {
 
@@ -94,90 +128,91 @@ export default function Cart({navigation}) {
   };
   const handleReduceQuantity = (itemId) => {
 
-  const updatedCart = cartItems.map(item => {
-    if (item.id === itemId) {
-   
-      const newQuantity = Math.max(1, item.quantity - 1);
-      return { ...item, quantity: newQuantity };
-    }
-    return item;
-  });
+    const updatedCart = cartItems.map(item => {
+      if (item.id === itemId) {
 
-  setCartItems(updatedCart);
-
-
-  AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
-    .then(() => {
-      console.log('Số lượng sản phẩm đã được giảm');
-    })
-    .catch((error) => {
-      console.error('Lỗi khi lưu giỏ hàng mới:', error);
+        const newQuantity = Math.max(1, item.quantity - 1);
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
     });
-};
-const navigateToProductDetail = (item) => {
-   
-  navigation.navigate('ProductDetail', { item });
-};
+
+    setCartItems(updatedCart);
 
 
-return (
-  <View style={styles.container}>
-         <View style={styles.header}>
+    AsyncStorage.setItem('cart', JSON.stringify(updatedCart))
+      .then(() => {
+        console.log('Số lượng sản phẩm đã được giảm');
+      })
+      .catch((error) => {
+        console.error('Lỗi khi lưu giỏ hàng mới:', error);
+      });
+  };
+  const navigateToProductDetail = (item) => {
+
+    navigation.navigate('ProductDetail', { item });
+  };
+
+
+  return (
+
+    <View style={styles.container}>
+      <View style={styles.header}>
         <Header navigation={navigation} />
       </View>
-    <Text style={styles.header}>Giỏ hàng </Text>
-    {cartItems.length > 0 ? (
-      <FlatList
-        data={cartItems}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-           <TouchableOpacity onPress={()=>navigateToProductDetail(item)}>
-          <View style={styles.cartItem}>
+      <Text style={styles.header}>Giỏ hàng </Text>
+      {cartItems.length > 0 ? (
+        <FlatList
+          data={cartItems}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigateToProductDetail(item)}>
+              <View style={styles.cartItem}>
 
-            <Image source={{ uri: item.image }} style={styles.productImage} />
-            <View style={styles.productDetails}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>Giá tiền: ${item.price}</Text>
-              
+                <Image source={{ uri: item.image }} style={styles.productImage} />
+                <View style={styles.productDetails}>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.price}>Giá tiền: ${item.price}</Text>
 
-              <View style={styles.actionButtons}>
-                <View style={styles.action}>
-                  <View style={styles.congtru}>
-                    <TouchableOpacity  onPress={() => handleIncreaseQuantity(item.id)}>
-                      <Icon name="plus" size={19} color="#888888" />
+
+                  <View style={styles.actionButtons}>
+                    <View style={styles.action}>
+                      <View style={styles.congtru}>
+                        <TouchableOpacity onPress={() => handleIncreaseQuantity(item.id)}>
+                          <Icon name="plus" size={19} color="#888888" />
+                        </TouchableOpacity>
+                      </View>
+
+                      <Text style={styles.quantity}>{item.quantity}</Text>
+
+                      <View style={styles.congtru}>
+                        <TouchableOpacity onPress={() => handleReduceQuantity(item.id)}>
+                          <Icon name="minus" size={19} color="#888888" />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+
+                    <TouchableOpacity onPress={() => handleDeleteItem(item.id)}>
+                      <Text style={{ fontSize: 16, color: 'gray', }}>Xóa</Text>
                     </TouchableOpacity>
                   </View>
-                 
-                  <Text style={styles.quantity}>{item.quantity}</Text>
-
-                  <View style={styles.congtru}>
-                  <TouchableOpacity  onPress={() => handleReduceQuantity(item.id)}>
-                    <Icon  name="minus" size={19} color="#888888" />
-                  </TouchableOpacity>
-                  </View>
                 </View>
-
-                <TouchableOpacity onPress={() => handleDeleteItem(item.id)}>
-                  <Text style={{fontSize:16,color: 'gray',}}>Xóa</Text>
-                </TouchableOpacity>
               </View>
-            </View>
-          </View>
-           </TouchableOpacity>
-        )}
-      />
-    ) : (
-      <Text style={styles.emptyCartText}>Giỏ hàng trống</Text>
-    )}
-    <View style={styles.totalContainer}>
-      <Text style={styles.totalText}>Tổng thanh toán:</Text>
-      <Text style={styles.totalPrice}>${calculateTotalPrice()}</Text>
+            </TouchableOpacity>
+          )}
+        />
+      ) : (
+        <Text style={styles.emptyCartText}>Giỏ hàng trống</Text>
+      )}
+      <View style={styles.totalContainer}>
+        <Text style={styles.totalText}>Tổng thanh toán:</Text>
+        <Text style={styles.totalPrice}>${calculateTotalPrice()}</Text>
+      </View>
+      <TouchableOpacity style={styles.paymentButton} onPress={() => handleSubmit()}>
+        <Text style={styles.paymentButtonText}>Thanh toán</Text>
+      </TouchableOpacity>
     </View>
-    <TouchableOpacity style={styles.paymentButton}>
-      <Text style={styles.paymentButtonText}>Thanh toán</Text>
-    </TouchableOpacity>
-  </View>
-);
+  );
 
 }
 
@@ -189,7 +224,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 23,
-    textAlign:"center",
+    textAlign: "center",
     color: 'red',
     fontWeight: 'bold',
     marginBottom: 16,
@@ -199,8 +234,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     padding: 8,
     marginBottom: 8,
-    borderBottomColor:'black',
-    borderBottomWidth:0.2,
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.2,
   },
   productImage: {
     width: 100,
@@ -223,31 +258,31 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 14,
     color: 'gray',
-    textAlign:'center',
-    borderRightWidth:0.6,
-    borderLeftWidth:0.6,
-    borderColor:'#EEEEEE',
-    width:30,
-    height:20,
- 
+    textAlign: 'center',
+    borderRightWidth: 0.6,
+    borderLeftWidth: 0.6,
+    borderColor: '#EEEEEE',
+    width: 30,
+    height: 20,
+
   },
-  congtru:{
-    textAlign:'center',
-    paddingTop:2,
+  congtru: {
+    textAlign: 'center',
+    paddingTop: 2,
   },
-  action:{
+  action: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    borderWidth:1,
-    borderColor:'#EEEEEE',
-    width:100,
-    height:25,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+    width: 100,
+    height: 25,
   },
   actionButtons: {
     flexDirection: 'row',
     marginTop: 10,
     justifyContent: 'space-around',
-    height:20,
+    height: 20,
   },
   actionButtonText: {
     color: 'blue',
@@ -284,5 +319,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'gray',
   },
-  
+
 });
