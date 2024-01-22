@@ -18,7 +18,7 @@ const Search = ({navigation}) => {
         onChangeText={setSearchText}
       /> */}
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-        <Text style={{fontSize:20,paddingLeft:17,fontWeight:"bold",color:"blue"}}>BEAUTY BEACUSE OF SILK</Text>
+        <Text style={{fontSize:20,paddingLeft:17,fontWeight:"bold",color:"blue"}}>BEAUTY BECAUSE OF SILK</Text>
       </TouchableOpacity>
     </View>
     

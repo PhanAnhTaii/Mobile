@@ -19,7 +19,7 @@ const Product = ({ navigation, navigateToProductDetail, addToCart }) => {
       })
       .catch(function (error) {
         alert(error.message);
-      })
+      })  
       .finally(function () {
         console.log('Finally called');
       });

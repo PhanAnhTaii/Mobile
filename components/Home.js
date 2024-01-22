@@ -1,17 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from './Footer';
-import Header from './Header';
-import Product from './products/Product';
-import ProductJewelery from './products/ProductJewelery';
-import ProductElectronics from './products/ProductElectronics';
-import ProductMenClothing from './products/ProductMenClothing';
-import ProductWomenClothing from './products/ProductWomenClothing';
-import Search from './products/Search';
-import Slider from './products/Slider';
-import Category from './products/Category';
-import { ImageBackground } from 'react-native-web';
+import Product from './pages/Product';
+
+import Search from './pages/Search';
+import Slider from './pages/Slider';
+import Category from './pages/Category';
 
 export default function Home({ navigation }) {
   const navigateToProductDetail = (item) => {
@@ -22,7 +17,6 @@ export default function Home({ navigation }) {
 
 
   return (
-
 
     <View style={styles.container}>
       
@@ -47,7 +41,6 @@ export default function Home({ navigation }) {
         <StatusBar style="auto" />
       
     </View>
-
   );
 }
 

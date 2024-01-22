@@ -3,19 +3,19 @@ import { StyleSheet, View, ImageBackground, KeyboardAvoidingView } from 'react-n
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from './components/login/Login';
+import Login from './components/pages/Login';
 import Home from './components/Home';
-import Register from './components/login/Register';
-import Profile from './components/profile/Profile';
-import Cart from './components/cart/Cart';
-import Product from './components/products/Product';
-import Category from './components/products/Category';
-import ProductDetail from './components/products/ProductDetail';
-import ProductJewelery from './components/products/ProductJewelery';
-import ProductElectronics from './components/products/ProductElectronics';
-import ProductMenClothing from './components/products/ProductMenClothing';
-import ProductWomenClothing from './components/products/ProductWomenClothing';
-import ResultSearch from './components/products/ResultSearch';
+import Register from './components/pages/Register';
+import Profile from './components/pages/Profile';
+import Cart from './components/pages/Cart';
+import Product from './components/pages/Product';
+import Category from './components/pages/Category';
+import ProductDetail from './components/pages/ProductDetail';
+import ProductJewelery from './components/pages/ProductJewelery';
+import ProductElectronics from './components/pages/ProductElectronics';
+import ProductMenClothing from './components/pages/ProductMenClothing';
+import ProductWomenClothing from './components/pages/ProductWomenClothing';
+import ResultSearch from './components/pages/ResultSearch';
 
 const Stack = createNativeStackNavigator();
 

@@ -20,7 +20,8 @@ function Login({ navigation }) {
       if(flag){
         alert("Đăng nhập thành công");
         navigation.navigate("Home");
-      }else{
+      }
+      else{
         alert("Email hoặc mật khẩu không chính xác");
         return;
       }

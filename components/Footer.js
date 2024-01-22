@@ -16,7 +16,7 @@ export default function Footer({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate('ResultSearch')}>
           <View style={styles.centericon}>      
               <Icon name="search" size={20} color="black" />
-            <Text style={{fontSize:12}}>Trang chủ</Text>
+            <Text style={{fontSize:12}}>Tìm kiếm</Text>
           </View>
         </TouchableOpacity>
 
